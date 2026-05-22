@@ -31,7 +31,7 @@ const {
 );
 
 const Class = require(
-    "../models/Class"
+    "../models/class"
 );
 
 
