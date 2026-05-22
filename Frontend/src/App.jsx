@@ -10,7 +10,7 @@ import ProtectedRoute from "./components/Common/ProtectedRoutes";
 import TimetablePage from "./pages/TimetablePage";
 import AdminAttendancePage from "./pages/admin/AdminAttendancePage";
 import FeesPage from "./pages/FeesPage";
-import AIStudyPage from "./pages/AIStudyPage";
+import AiStudyPage from "./pages/AiStudyPage";
 import LiveClassPage from "./pages/LiveClassPage";
 import Users from "./pages/admin/Users";
 import StockPage from "./pages/admin/StockPage";
@@ -95,7 +95,7 @@ function App() {
 
         <Route
           path="/ai-study"
-          element={<AIStudyPage />}
+          element={<AiStudyPage />}
         />
 
         <Route

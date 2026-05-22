@@ -5,7 +5,7 @@ import axios from "axios";
 
 
 
-function AIStudyPage() {
+function AiStudyPage() {
 
     // 🧠 User input
     const [question,
@@ -218,4 +218,4 @@ function AIStudyPage() {
     );
 }
 
-export default AIStudyPage;
+export default AiStudyPage;
