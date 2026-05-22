@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import BackgroundImage from "../assets/BackgroundLogin.png";
 
 function Login() {
 
@@ -86,7 +87,7 @@ function Login() {
             <div
                 className="flex flex-col justify-center items-center w-full px-5 bg-cover bg-center min-h-screen"
                 style={{
-                    backgroundImage: `url(${backgroundImage})`
+                    backgroundImage: `url(${BackgroundImage})`
                 }}
             >
             {/* <div className="flex flex-col justify-center items-center bg-linear-to-r from-blue-900 to-blue-300 w-full px-5"> */}
