@@ -77,9 +77,19 @@ function Login() {
     };
 
     return (
+// for local host
+        // <div className="flex flex-col justify-center items-center 
+        // bg-[url(BackgroundLogin.png)] 
+        // bg-cover bg-bottom-right w-full px-5">
 
-        <div className="flex flex-col justify-center items-center bg-[url(BackgroundLogin.png)] bg-cover bg-bottom-right w-full px-5">
-        {/* <div className="flex flex-col justify-center items-center bg-linear-to-r from-blue-900 to-blue-300 w-full px-5"> */}
+        // for Live production level
+            <div
+                className="flex flex-col justify-center items-center w-full px-5 bg-cover bg-center min-h-screen"
+                style={{
+                    backgroundImage: `url(${backgroundImage})`
+                }}
+            >
+            {/* <div className="flex flex-col justify-center items-center bg-linear-to-r from-blue-900 to-blue-300 w-full px-5"> */}
 
             <div className="min-h-screen flex flex-col items-center justify-center text-white w-[50%] gap-15 ">
 
