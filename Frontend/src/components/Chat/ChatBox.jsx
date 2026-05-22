@@ -8,7 +8,7 @@ import ChatInput from "./ChatInput";
 
 import axios from "axios";
 
-import FileUpload from "../common/FileUpload";
+import FileUpload from "../Common/FileUpload";
 
 
 function ChatBox({
