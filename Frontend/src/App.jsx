@@ -7,7 +7,7 @@ import ChatPage from "./pages/ChatPage";
 import NotesPage from "./pages/NotesPage";
 import NotificationsPage from "./pages/NotificationsPage";
 import ProtectedRoute from "./components/Common/ProtectedRoutes";
-import TimetablePage from "./pages/timetablePage";
+import TimetablePage from "./pages/TimetablePage";
 import AdminAttendancePage from "./pages/admin/AdminAttendancePage";
 import FeesPage from "./pages/FeesPage";
 import AIStudyPage from "./pages/AIStudyPage";
