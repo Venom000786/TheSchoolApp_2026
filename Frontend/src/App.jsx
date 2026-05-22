@@ -17,7 +17,7 @@ import StockPage from "./pages/admin/StockPage";
 import AdminAnnouncementsPage from "./pages/admin/AdminAnnouncementsPage";
 import AdminAssignmentPage from "./pages/admin/AdminAssignmentPage";
 import TeacherClassPage from "./pages/teacher/TeacherClassPage";
-import TeacherAttendance from "./pages/Teacher/TeacherAttendance";
+import TeacherAttendance from "./pages/teacher/TeacherAttendance";
 import TeacherAssignment from "./pages/teacher/TeacherAssignment";
 import StudentAttendancePage from "./pages/student/StudentAttendancePage";
 import Assignments from "./pages/student/Assignment";
