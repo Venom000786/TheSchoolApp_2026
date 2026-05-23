@@ -13,7 +13,8 @@ function ReviewSubmissions() {
     const fetchSubmissions = async () => {
 
       const res = await axios.get(
-        "http://localhost:5000/api/teacher/submissions",
+        // "http://localhost:5000/api/teacher/submissions",
+        `${import.meta.env.VITE_API_URL}/api/teacher/submissions`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -35,7 +36,8 @@ function ReviewSubmissions() {
 
     await axios.put(
 
-      `http://localhost:5000/api/teacher/review/${id}`,
+      // `http://localhost:5000/api/teacher/review/${id}`,
+      `${import.meta.env.VITE_API_URL}/api/teacher/review/${id}`,
 
       {
         marks,

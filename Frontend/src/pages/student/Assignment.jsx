@@ -24,7 +24,8 @@ function Assignments() {
 
       const res = await axios.get(
 
-        "http://localhost:5000/api/classes/student/my",
+        // "http://localhost:5000/api/classes/student/my",
+        `${import.meta.env.VITE_API_URL}/api/classes/student/my`,
 
         {
           headers: {
@@ -68,7 +69,8 @@ function Assignments() {
 
       const res = await axios.get(
 
-        "http://localhost:5000/api/assignments",
+        // "http://localhost:5000/api/assignments",
+        `${import.meta.env.VITE_API_URL}/api/assignments`,
 
         {
           headers: {

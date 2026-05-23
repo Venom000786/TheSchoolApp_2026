@@ -3,15 +3,7 @@ import Peer from "peerjs";
 import io from "socket.io-client";
 import axios from "axios";
 
-const socket = io("http://localhost:5000", {
-    auth: {
-        token: localStorage.getItem("token")
-    }
-});
-
 function LiveClassPage() {
-
-    const [roomId, setRoomId] = useState("");
 
     const [classes, setClasses] = useState([]);
 
@@ -29,13 +21,40 @@ function LiveClassPage() {
 
     const streamRef = useRef(null);
 
-    const token =
-        localStorage.getItem("token");
+    const socketRef = useRef(null);
 
-    const user =
-        JSON.parse(
-            localStorage.getItem("user")
+    const token = localStorage.getItem("token");
+
+    const user = JSON.parse(
+        localStorage.getItem("user")
+    );
+
+    // ====================================
+    // SOCKET CONNECTION
+    // ====================================
+
+    useEffect(() => {
+
+        socketRef.current = io(
+            import.meta.env.VITE_API_URL,
+            {
+                transports: ["websocket"],
+
+                auth: {
+                    token
+                }
+            }
         );
+
+        return () => {
+
+            if (socketRef.current) {
+
+                socketRef.current.disconnect();
+            }
+        };
+
+    }, []);
 
     // ====================================
     // FETCH CLASSES
@@ -48,18 +67,17 @@ function LiveClassPage() {
             // 👨‍🎓 STUDENT
             if (user?.role === "student") {
 
-                const res =
-                    await axios.get(
+                const res = await axios.get(
 
-                        "http://localhost:5000/api/classes/student/my",
+                    `${import.meta.env.VITE_API_URL}/api/classes/student/my`,
 
-                        {
-                            headers: {
-                                Authorization:
-                                    `Bearer ${token}`
-                            }
+                    {
+                        headers: {
+                            Authorization:
+                                `Bearer ${token}`
                         }
-                    );
+                    }
+                );
 
                 if (res.data) {
 
@@ -70,28 +88,23 @@ function LiveClassPage() {
                     setSelectedClass(
                         res.data.className
                     );
-
-                    setRoomId(
-                        res.data.className
-                    );
                 }
 
             } else {
 
-                // 👨‍🏫 TEACHER / 👑 ADMIN
+                // 👨‍🏫 TEACHER / ADMIN
 
-                const res =
-                    await axios.get(
+                const res = await axios.get(
 
-                        "http://localhost:5000/api/classes",
+                    `${import.meta.env.VITE_API_URL}/api/classes`,
 
-                        {
-                            headers: {
-                                Authorization:
-                                    `Bearer ${token}`
-                            }
+                    {
+                        headers: {
+                            Authorization:
+                                `Bearer ${token}`
                         }
-                    );
+                    }
+                );
 
                 setClasses(
                     res.data || []
@@ -129,6 +142,7 @@ function LiveClassPage() {
 
         try {
 
+            // CAMERA + MIC
             const stream =
                 await navigator.mediaDevices.getUserMedia({
 
@@ -137,8 +151,7 @@ function LiveClassPage() {
                     audio: true
                 });
 
-            streamRef.current =
-                stream;
+            streamRef.current = stream;
 
             // SHOW MY VIDEO
             if (myVideoRef.current) {
@@ -150,31 +163,28 @@ function LiveClassPage() {
             }
 
             // CREATE PEER
-            const peer =
-                new Peer(undefined, {
+            const peer = new Peer(undefined, {
 
-                    host: "localhost",
+                host: import.meta.env.VITE_PEER_HOST,
 
-                    port: 9000,
+                secure: true,
 
-                    path: "/peerjs"
-                });
+                path: "/peerjs"
+            });
 
-            peerRef.current =
-                peer;
+            peerRef.current = peer;
 
-            // PEER READY
+            // PEER OPEN
             peer.on(
                 "open",
                 (peerId) => {
 
-                    socket.emit(
+                    socketRef.current.emit(
 
                         "join-live-room",
 
                         {
-                            roomId:
-                                selectedClass,
+                            roomId: selectedClass,
 
                             peerId
                         }
@@ -183,7 +193,7 @@ function LiveClassPage() {
             );
 
             // NEW USER CONNECTED
-            socket.on(
+            socketRef.current.on(
 
                 "user-connected",
 
@@ -204,8 +214,7 @@ function LiveClassPage() {
                         ) => {
 
                             if (
-                                remoteVideoRef.current &&
-                                !remoteVideoRef.current.srcObject
+                                remoteVideoRef.current
                             ) {
 
                                 remoteVideoRef.current.srcObject =
@@ -241,8 +250,7 @@ function LiveClassPage() {
                         ) => {
 
                             if (
-                                remoteVideoRef.current &&
-                                !remoteVideoRef.current.srcObject
+                                remoteVideoRef.current
                             ) {
 
                                 remoteVideoRef.current.srcObject =
@@ -282,13 +290,14 @@ function LiveClassPage() {
 
         return () => {
 
-            socket.off(
-                "user-connected"
-            );
+            if (socketRef.current) {
 
-            if (
-                streamRef.current
-            ) {
+                socketRef.current.off(
+                    "user-connected"
+                );
+            }
+
+            if (streamRef.current) {
 
                 streamRef.current
                     .getTracks()
@@ -297,9 +306,18 @@ function LiveClassPage() {
                             track.stop()
                     );
             }
+
+            if (peerRef.current) {
+
+                peerRef.current.destroy();
+            }
         };
 
     }, []);
+
+    // ====================================
+    // LOADING
+    // ====================================
 
     if (loading) {
 
@@ -334,6 +352,7 @@ function LiveClassPage() {
         >
 
             {/* HEADER */}
+
             <div
                 className="
                     flex
@@ -363,9 +382,9 @@ function LiveClassPage() {
                         {
                             user?.role === "student"
 
-                            ? "Join your class live session"
+                                ? "Join your class live session"
 
-                            : "Select any class to start live class"
+                                : "Select any class to start live class"
                         }
 
                     </p>
@@ -382,71 +401,66 @@ function LiveClassPage() {
                     "
                 >
 
-                    {/* STUDENT */}
                     {
                         user?.role === "student"
 
-                        ? (
+                            ? (
 
-                            <div
-                                className="
-                                    px-6
-                                    py-4
-                                    rounded-2xl
-                                    bg-white/10
-                                    text-lg
-                                    font-semibold
-                                "
-                            >
-                                {selectedClass}
-                            </div>
-                        )
+                                <div
+                                    className="
+                                        px-6
+                                        py-4
+                                        rounded-2xl
+                                        bg-white/10
+                                        text-lg
+                                        font-semibold
+                                    "
+                                >
+                                    {selectedClass}
+                                </div>
+                            )
 
-                        : (
+                            : (
 
-                            <select
+                                <select
 
-                                value={selectedClass}
+                                    value={selectedClass}
 
-                                onChange={(e) => {
+                                    onChange={(e) => {
 
-                                    setSelectedClass(
-                                        e.target.value
-                                    );
+                                        setSelectedClass(
+                                            e.target.value
+                                        );
+                                    }}
 
-                                    setRoomId(
-                                        e.target.value
-                                    );
-                                }}
+                                    className="
+                                        bg-[#1e293b]
+                                        border
+                                        border-white/10
+                                        rounded-2xl
+                                        px-5
+                                        py-4
+                                        outline-none
+                                        min-w-[250px]
+                                    "
+                                >
 
-                                className="
-                                    bg-[#1e293b]
-                                    border
-                                    border-white/10
-                                    rounded-2xl
-                                    px-5
-                                    py-4
-                                    outline-none
-                                    min-w-[250px]
-                                "
-                            >
-
-                                <option value="">
-                                    Select Class
-                                </option>
-
-                                {classes.map((c) => (
-
-                                    <option
-                                        key={c._id}
-                                        value={c.className}
-                                    >
-                                        {c.className}
+                                    <option value="">
+                                        Select Class
                                     </option>
-                                ))}
 
-                            </select>
-                        )
+                                    {classes.map((c) => (
+
+                                        <option
+                                            key={c._id}
+                                            value={c.className}
+                                        >
+                                            {c.className}
+                                        </option>
+                                    ))}
+
+                                </select>
+                            )
                     }
 
                     {/* JOIN BUTTON */}

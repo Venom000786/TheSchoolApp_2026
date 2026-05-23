@@ -26,7 +26,8 @@ function Users() {
         try {
 
             const res = await axios.get(
-                "http://localhost:5000/api/admin/users",
+                // "http://localhost:5000/api/admin/users",
+                `${import.meta.env.VITE_API_URL}/api/admin/users`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -65,7 +66,8 @@ function Users() {
 
                 await axios.put(
 
-                    `http://localhost:5000/api/admin/user/${editingId}`,
+                    // `http://localhost:5000/api/admin/user/${editingId}`,
+                    `${import.meta.env.VITE_API_URL}/api/admin/user/${editingId}`,
 
                     form,
 
@@ -83,7 +85,8 @@ function Users() {
                 // CREATE
                 await axios.post(
 
-                    "http://localhost:5000/api/admin/users",
+                    // "http://localhost:5000/api/admin/users",
+                    `${import.meta.env.VITE_API_URL}/api/admin/users`,
 
                     form,
 
@@ -128,7 +131,8 @@ function Users() {
 
             await axios.delete(
 
-                `http://localhost:5000/api/admin/user/${id}`,
+                // `http://localhost:5000/api/admin/user/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/admin/user/${id}`,
 
                 {
                     headers: {
@@ -171,7 +175,8 @@ function Users() {
 
             const res = await axios.get(
 
-                `http://localhost:5000/api/admin/search?keyword=${search}`,
+                // `http://localhost:5000/api/admin/search?keyword=${search}`,
+                `${import.meta.env.VITE_API_URL}/api/admin/search?keyword=${search}`,
 
                 {
                     headers: {

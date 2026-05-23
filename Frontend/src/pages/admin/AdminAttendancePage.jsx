@@ -57,7 +57,8 @@ function AdminAttendancePage() {
             const res =
                 await axios.get(
 
-                    "http://localhost:5000/api/admin/users",
+                    // "http://localhost:5000/api/admin/users",
+                    `${import.meta.env.VITE_API_URL}/api/admin/users`,
 
                     {
                         headers: {
@@ -98,7 +99,8 @@ function AdminAttendancePage() {
             const res =
                 await axios.get(
 
-                    "http://localhost:5000/api/attendance",
+                    // "http://localhost:5000/api/attendance",
+                    `${import.meta.env.VITE_API_URL}/api/attendance`,
 
                     {
                         headers: {
@@ -200,7 +202,8 @@ function AdminAttendancePage() {
 
                 await axios.post(
 
-                    "http://localhost:5000/api/attendance",
+                    // "http://localhost:5000/api/attendance",
+                    `${import.meta.env.VITE_API_URL}/api/attendance`,
 
                     {
                         studentId:
@@ -256,7 +259,8 @@ function AdminAttendancePage() {
 
                 await axios.put(
 
-                    `http://localhost:5000/api/attendance/${attendanceId}`,
+                    // `http://localhost:5000/api/attendance/${attendanceId}`,
+                    `${import.meta.env.VITE_API_URL}/api/attendance/${attendanceId}`,
 
                     {
                         status

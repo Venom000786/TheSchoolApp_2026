@@ -33,7 +33,8 @@ function StudentAttendancePage() {
 
             const res = await axios.get(
 
-                "http://localhost:5000/api/attendance/my",
+                // "http://localhost:5000/api/attendance/my",
+                `${import.meta.env.VITE_API_URL}/api/attendance/my`,
 
                 {
                     headers: {

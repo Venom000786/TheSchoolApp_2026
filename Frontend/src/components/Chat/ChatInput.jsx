@@ -98,7 +98,8 @@ function ChatInput({
             const res =
             await axios.post(
 
-                "http://localhost:5000/api/chat/upload",
+                // "http://localhost:5000/api/chat/upload",
+                `${import.meta.env.VITE_API_URL}/chat/upload`,
 
                 formData,
 

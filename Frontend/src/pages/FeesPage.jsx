@@ -77,12 +77,14 @@ function FeesPage() {
             if (role === "admin") {
 
                 url =
-                    "http://localhost:5000/api/fees";
+                    // "http://localhost:5000/api/fees";
+                    `${import.meta.env.VITE_API_URL}/api/fees`;
 
             } else {
 
                 url =
-                    "http://localhost:5000/api/fees/my";
+                    // "http://localhost:5000/api/fees/my";
+                    `${import.meta.env.VITE_API_URL}/api/fees`;
             }
 
             const res = await axios.get(
@@ -212,7 +214,8 @@ function FeesPage() {
 
                 await axios.put(
 
-                    `http://localhost:5000/api/fees/${editingFee}`,
+                    // `http://localhost:5000/api/fees/${editingFee}`,
+                    `${import.meta.env.VITE_API_URL}/api/fees/${editingFee}`,
 
                     {
                         amount:
@@ -238,7 +241,8 @@ function FeesPage() {
 
                 await axios.post(
 
-                    "http://localhost:5000/api/fees",
+                    // "http://localhost:5000/api/fees",
+                    `${import.meta.env.VITE_API_URL}/api/fees`,
 
                     {
                         studentId:
@@ -345,7 +349,8 @@ function FeesPage() {
 
             await axios.delete(
 
-                `http://localhost:5000/api/fees/${id}`,
+                // `http://localhost:5000/api/fees/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/fees/${id}`,
 
                 {
                     headers: {
@@ -392,7 +397,8 @@ function FeesPage() {
 
             await axios.put(
 
-                `http://localhost:5000/api/fees/installment/${id}`,
+                // `http://localhost:5000/api/fees/installment/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/fees/installment/${id}`,
 
                 {
                     amount:

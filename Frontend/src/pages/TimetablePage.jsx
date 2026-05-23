@@ -45,7 +45,8 @@ function TimetablePage() {
                 const res =
                     await axios.get(
 
-                        "http://localhost:5000/api/timetable",
+                        // "http://localhost:5000/api/timetable",
+                        `${import.meta.env.VITE_API_URL}/api/timetable`,
 
                         {
                             headers: {
@@ -74,7 +75,8 @@ function TimetablePage() {
 
                     setPdfUrl(
 
-                        `http://localhost:5000${res.data.pdfFile}`
+                        // `http://localhost:5000${res.data.pdfFile}`
+                        `${import.meta.env.VITE_API_URL}${res.data.pdfFile}`
                     );
 
                 } else {
@@ -136,7 +138,8 @@ function TimetablePage() {
                 const res =
                     await axios.post(
 
-                        "http://localhost:5000/api/timetable/upload-pdf",
+                        // "http://localhost:5000/api/timetable/upload-pdf",
+                        `${import.meta.env.VITE_API_URL}/api/timetable/upload-pdf`,
 
                         formData,
 

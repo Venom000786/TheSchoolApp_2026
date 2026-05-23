@@ -80,7 +80,7 @@ function ChatBox({
 
                 const res = await axios.get(
 
-                    `http://localhost:5000/api/chat/messages?senderId=${user._id}&receiverId=${receiverId}`,
+                    `${import.meta.env.VITE_API_URL}/api/chat/messages?senderId=${user._id}&receiverId=${receiverId}`,
 
                     {
                         headers: {

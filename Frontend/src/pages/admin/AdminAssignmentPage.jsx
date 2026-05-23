@@ -60,7 +60,8 @@ function AdminAssignmentPage() {
                 const res =
                     await axios.get(
 
-                        "http://localhost:5000/api/assignments",
+                        // "http://localhost:5000/api/assignments",
+                        `${import.meta.env.VITE_API_URL}/api/assignments`,
 
                         {
                             headers: {
@@ -126,7 +127,8 @@ function AdminAssignmentPage() {
                 const res =
                     await axios.get(
 
-                        "http://localhost:5000/api/classes/all",
+                        // "http://localhost:5000/api/classes/all",
+                        `${import.meta.env.VITE_API_URL}/api/classes/all`,
 
                         {
                             headers: {
@@ -227,7 +229,8 @@ function AdminAssignmentPage() {
 
                 await axios.post(
 
-                    "http://localhost:5000/api/assignments",
+                    // "http://localhost:5000/api/assignments",
+                    `${import.meta.env.VITE_API_URL}/api/assignments`,
 
                     form,
 
@@ -302,7 +305,8 @@ function AdminAssignmentPage() {
 
                 await axios.delete(
 
-                    `http://localhost:5000/api/assignments/${id}`,
+                    // `http://localhost:5000/api/assignments/${id}`,
+                    `${import.meta.env.VITE_API_URL}/api/assignments/${id}`,
 
                     {
                         headers: {

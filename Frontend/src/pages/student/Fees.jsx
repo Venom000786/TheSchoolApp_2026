@@ -12,7 +12,8 @@ function Fees() {
     const fetchFees = async () => {
 
       const res = await axios.get(
-        "http://localhost:5000/api/fees/my",
+        // "http://localhost:5000/api/fees/my",
+        `${import.meta.env.VITE_API_URL}/api/fees/my`,
 
         {
           headers: {
@@ -32,7 +33,8 @@ function Fees() {
 
     await axios.put(
 
-      `http://localhost:5000/api/fees/pay/${id}`,
+      // `http://localhost:5000/api/fees/pay/${id}`,
+      `${import.meta.env.VITE_API_URL}/api/fees/pay/${id}`,
 
       {},
 

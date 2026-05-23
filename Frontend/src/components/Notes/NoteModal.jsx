@@ -57,7 +57,8 @@ function NoteModal({
 
                 await axios.post(
 
-                    "http://localhost:5000/api/notes",
+                    // "http://localhost:5000/api/notes",
+                    `${import.meta.env.VITE_API_URL}/api/notes`,
 
                     {
                         title,
@@ -78,7 +79,8 @@ function NoteModal({
                 // ✏️ UPDATE
                 await axios.put(
 
-                    `http://localhost:5000/api/notes/${note._id}`,
+                    // `http://localhost:5000/api/notes/${note._id}`,
+                    `${import.meta.env.VITE_API_URL}/api/notes/${note._id}`,
 
                     {
                         title,

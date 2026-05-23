@@ -73,7 +73,8 @@ function TeacherAttendance() {
             const res =
             await axios.get(
 
-                "http://localhost:5000/api/classes/my",
+                // "http://localhost:5000/api/classes/my",
+                `${import.meta.env.VITE_API_URL}/api/classes/my`,
 
                 {
                     headers: {
@@ -177,7 +178,8 @@ function TeacherAttendance() {
             const res =
             await axios.get(
 
-                "http://localhost:5000/api/attendance/all",
+                // "http://localhost:5000/api/attendance/all",
+                `${import.meta.env.VITE_API_URL}/api/attendance/all`,
 
                 {
                     headers: {
@@ -295,7 +297,8 @@ function TeacherAttendance() {
 
                 await axios.post(
 
-                    "http://localhost:5000/api/attendance",
+                    // "http://localhost:5000/api/attendance",
+                    `${import.meta.env.VITE_API_URL}/api/attendance`,
 
                     {
 

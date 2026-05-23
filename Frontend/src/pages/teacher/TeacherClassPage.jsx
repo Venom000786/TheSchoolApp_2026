@@ -30,7 +30,8 @@ function TeacherClassesPage() {
 
             const res = await axios.get(
 
-                "http://localhost:5000/api/classes/my",
+                // "http://localhost:5000/api/classes/my",
+                `${import.meta.env.VITE_API_URL}/api/classes/my`,
 
                 {
                     headers: {
@@ -58,7 +59,8 @@ function TeacherClassesPage() {
 
             const res = await axios.get(
 
-                "http://localhost:5000/api/classes/students",
+                // "http://localhost:5000/api/classes/students",
+                `${import.meta.env.VITE_API_URL}/api/classes/students`,
 
                 {
                     headers: {
@@ -105,7 +107,8 @@ function TeacherClassesPage() {
 
             await axios.post(
 
-                "http://localhost:5000/api/classes",
+                // "http://localhost:5000/api/classes",
+                `${import.meta.env.VITE_API_URL}/api/classes`,
 
                 { className },
 
@@ -155,7 +158,8 @@ function TeacherClassesPage() {
 
             await axios.post(
 
-                "http://localhost:5000/api/classes/add-student",
+                // "http://localhost:5000/api/classes/add-student",
+                `${import.meta.env.VITE_API_URL}/api/classes/add-student`,
 
                 {
                     classId: selectedClass,
@@ -204,7 +208,8 @@ function TeacherClassesPage() {
 
             await axios.post(
 
-                "http://localhost:5000/api/classes/remove-student",
+                // "http://localhost:5000/api/classes/remove-student",
+                `${import.meta.env.VITE_API_URL}/api/classes/remove-student`,
 
                 {
                     classId,
@@ -249,7 +254,8 @@ function TeacherClassesPage() {
 
             await axios.delete(
 
-                `http://localhost:5000/api/classes/${id}`,
+                // `http://localhost:5000/api/classes/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/classes/${id}`,
 
                 {
                     headers: {
@@ -289,7 +295,8 @@ function TeacherClassesPage() {
 
             await axios.put(
 
-                `http://localhost:5000/api/classes/${id}`,
+                // `http://localhost:5000/api/classes/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/classes/${id}`,
 
                 {
                     className: editClassName

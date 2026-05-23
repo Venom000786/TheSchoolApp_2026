@@ -40,7 +40,8 @@ function NotificationsPage() {
             const res =
             await axios.get(
 
-                "http://localhost:5000/api/announcements",
+                // "http://localhost:5000/api/announcements",
+                `${import.meta.env.VITE_API_URL}/api/announcements`,
 
                 {
                     headers: {

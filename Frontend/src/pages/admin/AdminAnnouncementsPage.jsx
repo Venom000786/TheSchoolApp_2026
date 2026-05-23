@@ -33,7 +33,8 @@ function AdminAnnouncementsPage() {
             const res =
             await axios.get(
 
-                "http://localhost:5000/api/announcements",
+                // "http://localhost:5000/api/announcements",
+                `${import.meta.env.VITE_API_URL}/api/announcements`,
 
                 {
                     headers: {
@@ -94,7 +95,8 @@ function AdminAnnouncementsPage() {
 
             await axios.post(
 
-                "http://localhost:5000/api/announcements",
+                // "http://localhost:5000/api/announcements",
+                `${import.meta.env.VITE_API_URL}/api/announcements`,
 
                 form,
 
@@ -137,8 +139,8 @@ function AdminAnnouncementsPage() {
 
             await axios.delete(
 
-                `http://localhost:5000/api/announcements/${id}`,
-
+                // `http://localhost:5000/api/announcements/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/announcements/${id}`,
                 {
                     headers: {
 

@@ -12,14 +12,16 @@ function NoteForm({ note, close }) {
         if (note._id) {
             // update
             await axios.put(
-                `http://localhost:5000/api/notes/${note._id}`,
+                // `http://localhost:5000/api/notes/${note._id}`,
+                `${import.meta.env.VITE_API_URL}/api/notes/${note._id}`,
                 { title, content, color },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
         } else {
             // create
             await axios.post(
-                "http://localhost:5000/api/notes",
+                // "http://localhost:5000/api/notes",
+                `${import.meta.env.VITE_API_URL}/api/notes`,
                 { title, content, color },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -31,7 +33,8 @@ function NoteForm({ note, close }) {
 
     const deleteNote = async () => {
         await axios.delete(
-            `http://localhost:5000/api/notes/${note._id}`,
+            // `http://localhost:5000/api/notes/${note._id}`,
+            `${import.meta.env.VITE_API_URL}/api/notes/${note._id}`,
             { headers: { Authorization: `Bearer ${token}` } }
         );
 

@@ -42,8 +42,8 @@ function StockPage() {
 
             const res = await axios.get(
 
-                "http://localhost:5000/api/stocks",
-
+                // "http://localhost:5000/api/stocks",
+                `${import.meta.env.VITE_API_URL}/api/stocks`,
                 {
                     headers: {
                         Authorization:
@@ -100,7 +100,8 @@ function StockPage() {
                 // UPDATE
                 await axios.put(
 
-                    `http://localhost:5000/api/stocks/${editingId}`,
+                    // `http://localhost:5000/api/stocks/${editingId}`,
+                    `${import.meta.env.VITE_API_URL}/api/stocks/${editingId}`,
 
                     form,
 
@@ -117,7 +118,8 @@ function StockPage() {
                 // ADD
                 await axios.post(
 
-                    "http://localhost:5000/api/stocks",
+                    // "http://localhost:5000/api/stocks",
+                    `${import.meta.env.VITE_API_URL}/api/stocks`,
 
                     form,
 
@@ -168,7 +170,8 @@ function StockPage() {
 
             await axios.delete(
 
-                `http://localhost:5000/api/stocks/${id}`,
+                // `http://localhost:5000/api/stocks/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/stocks/${id}`,
 
                 {
                     headers: {
@@ -198,7 +201,8 @@ function StockPage() {
 
             await axios.put(
 
-                `http://localhost:5000/api/stocks/return/${id}`,
+                // `http://localhost:5000/api/stocks/return/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/stocks/return/${id}`,
 
                 {},
 
