@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import BackgroundImage from "../assets/BackgroundLogin.png";
+import BackgroundImage from "../../public/BackgroundLogin.png";
 
 function Login() {
 
