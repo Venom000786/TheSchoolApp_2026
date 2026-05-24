@@ -8,15 +8,22 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    // NEW
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
 
         e.preventDefault();
 
+        // START LOADING
+        setLoading(true);
+
         try {
 
             const res = await axios.post(
+                // "http://localhost:5000/api/auth/login",
                 `${import.meta.env.VITE_API_URL}/api/auth/login`,
                 {
                     email,
@@ -53,6 +60,7 @@ function Login() {
             alert("Login Successful");
 
             console.log("Navigating...");
+
             // Navigate by role
             if (res.data.user.role === "admin") {
                 navigate("/admin");
@@ -74,31 +82,33 @@ function Login() {
                 err.response?.data?.message ||
                 "Login failed"
             );
+
+        } finally {
+
+            // STOP LOADING
+            setLoading(false);
         }
     };
 
     return (
-// for local host
-        // <div className="flex flex-col justify-center items-center 
-        // bg-[url(BackgroundLogin.png)] 
-        // bg-cover bg-bottom-right w-full px-5">
 
-        // for Live production level
-            <div
-                className="flex flex-col justify-center items-center w-full px-5 bg-cover bg-center min-h-screen"
-                style={{
-                    backgroundImage: `url(${BackgroundImage})`
-                }}
-            >
-            {/* <div className="flex flex-col justify-center items-center bg-linear-to-r from-blue-900 to-blue-300 w-full px-5"> */}
+        <div
+            className="flex flex-col justify-center items-center w-full px-5 bg-cover bg-center min-h-screen"
+            style={{
+                backgroundImage: `url(${BackgroundImage})`
+            }}
+        >
 
             <div className="min-h-screen flex flex-col items-center justify-center text-white w-[50%] gap-15 ">
 
-                <h1 className="text-2xl">Welcome to THE SCHOOL APP</h1>
+                <h1 className="text-2xl">
+                    Welcome to THE SCHOOL APP
+                </h1>
 
                 <form
                     onSubmit={handleLogin}
-                    className="bg-white/30 p-10 rounded-3xl w-[400px] backdrop-blur-xl">
+                    className="bg-white/30 p-10 rounded-3xl w-[400px] backdrop-blur-xl"
+                >
 
                     <h1 className="text-4xl mb-6 text-center">
                         Login
@@ -126,10 +136,17 @@ function Login() {
 
                     <button
                         type="submit"
-                        className="w-full bg-blue-500 p-3 rounded-xl" >
-                        Login
-                    </button>
+                        disabled={loading}
+                        className="w-full bg-blue-500 p-3 rounded-xl"
+                    >
 
+                        {
+                            loading
+                                ? "Loading please wait..."
+                                : "Login"
+                        }
+
+                    </button>
 
                 </form>
 
@@ -158,14 +175,10 @@ function Login() {
 
                 </div>
 
-
             </div>
-
-
 
         </div>
     );
 }
-
 
 export default Login;
